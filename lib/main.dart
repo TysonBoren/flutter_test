@@ -9,12 +9,23 @@ import 'package:flutter/material.dart';
 //for a function with one expression the below syntax is possible.
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
   void answerQuestion() {
-    print('Answer chosen!');
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
+    print(questionIndex);
   }
 
-  //override is a 'decorator'. when you override a statless widget, its best practise to use @override for clarity.
   @override
   Widget build(BuildContext context) {
     var questions = [
@@ -28,7 +39,11 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text('The question!'),
+            //can use .elementAt or use [] to target by index.
+            // Text(questions.elementAt(0)),
+            Text(
+              questions[questionIndex],
+            ),
             RaisedButton(
               child: Text('Answer 1'),
               onPressed: answerQuestion,
@@ -39,9 +54,9 @@ class MyApp extends StatelessWidget {
             ),
             RaisedButton(
               child: Text('Answer 3'),
-              onPressed: () {
+              onPressed: () => {
                 //additional code this is for the example of making this an object to have a larger function body
-                print('Answer 3 chosen');
+                print('Answer 3 chosen'),
               },
             ),
           ],
