@@ -20,6 +20,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Red', 'Green', 'White'],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+    },
+    {
+      'questionText': 'Who is the best guy named Tyson?',
+      'answers': ['Shag', 'James', 'Tyson', 'Tieson(what a dumb name)'],
+    },
+  ];
+
   var _questionIndex = 0;
 
   void _answerQuestion() {
@@ -27,25 +42,15 @@ class _MyAppState extends State<MyApp> {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
+    if (_questionIndex < questions.length) {
+      print('More questions ahead!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     //below, stored in the variable 'questions' is the shorthand for Map, which is like a dict, Map holds key/value pairs! We have 3 maps with sublists stored in a list!
-    const questions = [
-      {
-        'questionText': 'What\'s your favorite color?',
-        'answers': ['Black', 'Red', 'Green', 'White'],
-      },
-      {
-        'questionText': 'What\'s your favorite animal?',
-        'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
-      },
-      {
-        'questionText': 'Who is the best guy named Tyson?',
-        'answers': ['Shag', 'James', 'Tyson', 'Tieson(what a dumb name)'],
-      },
-    ];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
