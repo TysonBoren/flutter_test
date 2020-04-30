@@ -31,9 +31,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?'
+    //below, stored in the variable 'questions' is the shorthand for Map, which is like a dict, Map holds key/value pairs! We have 3 maps with sublists stored in a list!
+    const questions = [
+      {
+        'questionText': 'What\'s your favorite color?',
+        'answers': ['Black', 'Red', 'Green', 'White'],
+      },
+      {
+        'questionText': 'What\'s your favorite animal?',
+        'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+      },
+      {
+        'questionText': 'Who is the best guy named Tyson?',
+        'answers': ['Shag', 'James', 'Tyson', 'Tieson(what a dumb name)'],
+      },
     ];
     return MaterialApp(
       home: Scaffold(
@@ -45,11 +56,12 @@ class _MyAppState extends State<MyApp> {
             //can use .elementAt or use [] to target by index.
             // Text(questions.elementAt(0)),
             Question(
-              questions[_questionIndex],
+              questions[_questionIndex]['questionText'],
             ),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
